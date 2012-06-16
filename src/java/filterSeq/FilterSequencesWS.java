@@ -16,10 +16,10 @@ import javax.jws.WebResult;
  */
 @WebService(
         name            = "FilterSequences", 
-        targetNamespace = "http://wsannotations.ctegd.uga.edu/",
+        targetNamespace = "http://wsannotations.ctegd.uga.edu/services/",
         serviceName     = "FilterSequences",
-        portName        = "FilterSequencesPort"//,
-//        wsdlLocation    = "FilterSequences.wsdl"
+        portName        = "FilterSequencesPort",
+        wsdlLocation    = "FilterSequences.wsdl"
         )
 public class FilterSequencesWS {
 
@@ -39,9 +39,9 @@ public class FilterSequencesWS {
             
     { 
         if (evalue == null || evalCutoff == null || sequences == null)
-            throw new ImproperInputsFault("Either of evalue, evalueCutoff and sequences cannot be null..!");
+            throw new ImproperInputsFault("Either of evalue, evalueCutoff and sequences cannot be null..!",new Fault("ImproperInputs"));
         else if (evalue.equals("") || evalCutoff.doubleValue() <= 0 || sequences.equals(""))
-            throw new ImproperInputsFault("Either of evalue, evalueCutoff and sequences cannot be empty or null..!");
+            throw new ImproperInputsFault("Either of evalue, evalueCutoff and sequences cannot be empty or null..!",new Fault("ImproperInputs"));
         else
         {
             if(scoreCutoff == null) 
@@ -67,9 +67,9 @@ public class FilterSequencesWS {
             throws ImproperInputsFault
     {
         if (evalue == null || evalCutoff == null || sequences == null)
-            throw new ImproperInputsFault("Either of evalue, evalueCutoff and sequences cannot be null..!");
+            throw new ImproperInputsFault("Either of evalue, evalueCutoff and sequences cannot be null..!",new Fault("ImproperInputs"));
         else if (evalue.length == 0 || evalCutoff.doubleValue() <= 0 || sequences.length == 0)
-            throw new ImproperInputsFault("Either of evalue, evalueCutoff and sequences cannot be empty or null..!");
+            throw new ImproperInputsFault("Either of evalue, evalueCutoff and sequences cannot be empty or null..!",new Fault("ImproperInputs"));
         else
         {
             if(scoreCutoff == null) 

@@ -38,7 +38,7 @@ public class FilterSequencesImpl {
         }//if
         else
         {
-            throw new ImproperInputsFault("The arrays for exp, score and sequences should be of same length..!");
+            throw new ImproperInputsFault("The arrays for exp, score and sequences should be of same length..!",new Fault("ImproperInputs"));
         }//else
         return filteredSequences;
 
@@ -69,7 +69,7 @@ public class FilterSequencesImpl {
         }//if
         else
         {
-            throw new ImproperInputsFault("The arrays for exp, score and sequences should be of same length..!");
+            throw new ImproperInputsFault("The arrays for exp, score and sequences should be of same length..!",new Fault("ImproperInputs"));
         }//else
         
         return filteredSequences;
@@ -139,7 +139,7 @@ public class FilterSequencesImpl {
     }//filtercsv
     
 
-    public static void main(String[] args) throws java.io.IOException
+    public static void main(String[] args) throws Exception
     {
         //Test for array inputs
         out.println(filterArray(0.12, 10.0 , new double[]{0.003,0.03,0.3},new double[]{10,11,33}, new String[]{"cc","dd","ff"}));

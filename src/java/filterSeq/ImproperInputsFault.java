@@ -1,27 +1,46 @@
 
 package filterSeq;
 
-import static java.lang.System.out;
 import javax.xml.ws.WebFault;
 
 /**
  * @author Alok Dhamanaskar (alokd@uga.edu)
  * @see LICENSE (MIT style license file). 
  *
- * Class to represent ImproperInputs Exception, which will be converted to a fault Message for the Web service
+ * <br/> Class to represent ImproperInputs Exception, which will be converted to a fault Message for the Web service
  */
-public class ImproperInputsFault extends java.io.IOException {
-    
-    ImproperInputsFault(String errMsg)
+
+@WebFault(
+        name = "ImproperInputsFault",
+        targetNamespace = "http://wsannotations.ctegd.uga.edu/services/"
+        )
+public class ImproperInputsFault extends Exception 
+{
+        
+    private Fault faultInfo;
+   
+    ImproperInputsFault(String errMsg, Fault fi)
     {
         super(errMsg);
+        this.faultInfo = fi;
     }//ImproperInputsFault
+
+    ImproperInputsFault(String errMsg, Fault fi, Throwable cause)
+    {
+        super(errMsg);
+        this.faultInfo = fi;
+    }//ImproperInputsFault
+    
+    public Fault getFaultInfo()
+    {
+        return this.faultInfo;
+    }//getFaultInfo
     
     public static void main(String[] args) throws ImproperInputsFault
     {
         //Test code
-        out.println("Exception will occur");
-        throw new ImproperInputsFault("a,s,d cannot be null..!");
+        System.out.println("Exception will occur");
+        throw new ImproperInputsFault("a,s,d cannot be null..!", new Fault("Fault..!!"));
     
     }//main
 
