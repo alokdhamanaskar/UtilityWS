@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:tns="http://wsannotations.ctegd.uga.edu/services/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://wsannotations.ctegd.uga.edu/services/">
+    <wsdl:types>
+        <xsd:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://wsannotations.ctegd.uga.edu/services/">
+            <xsd:element name="ImproperInputsFault" nillable="true" type="tns:fault"/>
+            <xsd:element name="filterByEvalScore" type="tns:filterByEvalScore"/>
+            <xsd:element name="filterByEvalScoreCSV" type="tns:filterByEvalScoreCSV"/>
+            <xsd:element name="filterByEvalScoreCSVResponse" type="tns:filterByEvalScoreCSVResponse"/>
+            <xsd:element name="filterByEvalScoreResponse" type="tns:filterByEvalScoreResponse"/>
+            <xsd:complexType name="filterByEvalScore">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="unbounded"  name="evaluesArray" nillable="false" type="xsd:double"/>
+                    <xsd:element name="evalueCutoff" nillable="false" type="xsd:double"/>
+                    <xsd:element maxOccurs="unbounded" name="scoresArray" nillable="true" type="xsd:double"/>
+                    <xsd:element minOccurs="0" name="scoreCutoff" nillable="true" type="xsd:double"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="sequences" nillable="false" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="filterByEvalScoreResponse">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="FilteredSequences" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="fault">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="code" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="filterByEvalScoreCSV">
+                <xsd:sequence>
+                    <xsd:element name="evaluesCSV" type="xsd:string"/>
+                    <xsd:element name="evalueCutoff" type="xsd:double"/>
+                    <xsd:element name="scoresCSV" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="scoreCutoff" nillable="true" type="xsd:double"/>
+                    <xsd:element name="sequences"  type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="filterByEvalScoreCSVResponse">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="FilteredSequences" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="filterByEvalScore">
+        <wsdl:part name="parameters" element="tns:filterByEvalScore"/>
+    </wsdl:message>
+    <wsdl:message name="filterByEvalScoreResponse">
+        <wsdl:part name="parameters" element="tns:filterByEvalScoreResponse"/>
+    </wsdl:message>
+    <wsdl:message name="ImproperInputsFault">
+        <wsdl:part name="fault" element="tns:ImproperInputsFault"/>
+    </wsdl:message>
+    <wsdl:message name="filterByEvalScoreCSV">
+        <wsdl:part name="parameters" element="tns:filterByEvalScoreCSV"/>
+    </wsdl:message>
+    <wsdl:message name="filterByEvalScoreCSVResponse">
+        <wsdl:part name="parameters" element="tns:filterByEvalScoreCSVResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="filterSequencesPortType">
+        <wsdl:operation name="filterByEvalScore">
+            <wsdl:input message="tns:filterByEvalScore" wsaw:Action="http://wsannotations.ctegd.uga.edu/services/filterSequences/filterByEvalScoreRequest"/>
+            <wsdl:output message="tns:filterByEvalScoreResponse" wsaw:Action="http://wsannotations.ctegd.uga.edu/services/filterSequences/filterByEvalScoreResponse"/>
+            <wsdl:fault message="tns:ImproperInputsFault" name="ImproperInputsFault" wsaw:Action="http://wsannotations.ctegd.uga.edu/services/filterSequences/filterByEvalScore/Fault/ImproperInputsFault"/>
+        </wsdl:operation>
+        <wsdl:operation name="filterByEvalScoreCSV">
+            <wsdl:input message="tns:filterByEvalScoreCSV" wsaw:Action="http://wsannotations.ctegd.uga.edu/services/filterSequences/filterByEvalScoreCSVRequest"/>
+            <wsdl:output message="tns:filterByEvalScoreCSVResponse" wsaw:Action="http://wsannotations.ctegd.uga.edu/services/filterSequences/filterByEvalScoreCSVResponse"/>
+            <wsdl:fault message="tns:ImproperInputsFault" name="ImproperInputsFault" wsaw:Action="http://wsannotations.ctegd.uga.edu/services/filterSequences/filterByEvalScoreCSV/Fault/ImproperInputsFault"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="FilterSequencesPortBinding" type="tns:filterSequencesPortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="filterByEvalScore">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ImproperInputsFault">
+                <soap:fault use="literal" name="ImproperInputsFault"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="filterByEvalScoreCSV">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ImproperInputsFault">
+                <soap:fault use="literal" name="ImproperInputsFault"/>
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="filterSequences">
+        <wsdl:port name="FilterSequencesPort" binding="tns:FilterSequencesPortBinding">
+            <soap:address location="http://wsannotations.ctegd.uga.edu/axis2/services/filterSequences.FilterSequencesPort/"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
