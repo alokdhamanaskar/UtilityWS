@@ -6,7 +6,6 @@ import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
-import javax.xml.ws.WebFault;
 
 /**
  * @author Alok Dhamanaskar (alokd@uga.edu)
@@ -19,8 +18,8 @@ import javax.xml.ws.WebFault;
         name            = "FilterSequences", 
         targetNamespace = "http://wsannotations.ctegd.uga.edu/",
         serviceName     = "FilterSequences",
-        portName        = "FilterSequencesPort",
-        wsdlLocation    = "FilterSequences.wsdl"
+        portName        = "FilterSequencesPort"//,
+//        wsdlLocation    = "FilterSequences.wsdl"
         )
 public class FilterSequencesWS {
 

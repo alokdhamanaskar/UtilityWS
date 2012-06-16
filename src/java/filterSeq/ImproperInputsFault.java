@@ -2,6 +2,7 @@
 package filterSeq;
 
 import static java.lang.System.out;
+import javax.xml.ws.WebFault;
 
 /**
  * @author Alok Dhamanaskar (alokd@uga.edu)
